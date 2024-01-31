@@ -1,16 +1,23 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { startOfMonth, endOfMonth, eachDayOfInterval, format } from 'date-fns'
 
 import './styles.css';
 
 const Calendar = () => {
+  const [isValidDate, setIsValidDate] = useState(true);
   const { year, month } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log({ year }, { month })
+    if (month > 12) setIsValidDate(false)
   }, [year, month]);
+
+  if (!isValidDate) {
+    setIsValidDate(true)
+    const date = new Date()
+    navigate(`/${year}/${date.getMonth() + 1}`);
+  }
 
   const daysInMonth = useMemo(() => eachDayOfInterval({
     start: startOfMonth(new Date(year, month - 1)),
