@@ -36,12 +36,41 @@
 
 .day {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
+  position: relative;
   width: 100px;
   height: 100px;
   box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.day-number {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
   padding: 5px;
+  z-index: 1;
+}
+
+.day-number > div {
+  border-radius: 100%;
+  height: fit-content;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.active {
+  background-color: cyan;
+}
+
+.game-thumb {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
 .prevMonth {
