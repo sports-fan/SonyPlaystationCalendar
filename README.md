@@ -1,7 +1,18 @@
-# Getting Started with Create React App
+# Sony Playstation Calendar
+## Libraries
+react, react-router-dom, axios, data-fns, jest
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
+- The calendar renders events in the “Monthly” view (according to the desin).
+- The events fetch via an AJAX call is implemented from http://amock.io/. I used data from events.json file.
+- Used Flexbox and CSS Grid to render and style the calendar.
+- Provided a ‘Previous’ and ‘Next’ button to allow navigation between months.
+- Created a client-side algorithm for event placement within the calendar cells using the data in events.json and the images provided.
+- Clicking on a calendar event opens a simple view (as per the design) showing details of the event if it has an event.
+- The calendar is URL driven. Visiting an invalid date redirects to the current month(Febrary 2024)
+- Wrote unit tests using Jest.
 
+I am not sure if I impelemented everything as required. Looking forward to your feedback. Thank you
 ## Available Scripts
 
 In the project directory, you can run:
@@ -38,33 +49,3 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

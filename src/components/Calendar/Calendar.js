@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { startOfMonth, endOfMonth, eachDayOfInterval, format, getDate, getMonth, getYear } from 'date-fns';
+import axios from 'axios';
 
 import eventsData from './events.json';
 import './styles.css';
@@ -57,7 +57,6 @@ const Calendar = () => {
       navigate(`/${getYear(date)}/${getMonth(date) + 1}`);
     }
   }, [isValidDate, navigate]);
-
 
   const daysInMonth = useMemo(() => eachDayOfInterval({
     start: startOfMonth(new Date(year, month - 1)),
