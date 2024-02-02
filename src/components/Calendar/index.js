@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { startOfMonth, endOfMonth, eachDayOfInterval, format, getDate, getMonth, getYear } from 'date-fns';
+import { startOfMonth, endOfMonth, eachDayOfInterval, format, getDate, getDay, getMonth, getYear } from 'date-fns';
 import axios from 'axios';
 
 import eventsData from './events.json';
@@ -19,7 +19,6 @@ const Calendar = () => {
 
   useEffect(() => {
     if (month > 12 || month < 1) setIsValidDate(false);
-    // fetch event from the http://amock.io
     const fetchEvents = async () => {
       try {
         const response = await axios.get('http://amock.io/');
@@ -57,19 +56,21 @@ const Calendar = () => {
     }
   }, [isValidDate, navigate]);
 
-  const daysInMonth = useMemo(() => eachDayOfInterval({
-    start: startOfMonth(new Date(year, month - 1)),
-    end: endOfMonth(new Date(year, month - 1))
-  }), [year, month]);
-
   const daysInMonthWithEvent = useMemo(() => {
-    const ary = [];
-    for (let i = 0; i < daysInMonth.length; i++) {
-      if (i === 14) ary.push('event');
-      ary.push(daysInMonth[i]);
-    }
-    return ary;
-  }, [daysInMonth]);
+    const dayOfWeek = getDay(new Date(year, month - 1, 1))
+    const days = eachDayOfInterval({
+      start: startOfMonth(new Date(year, month - 1)),
+      end: endOfMonth(new Date(year, month - 1))
+    })
+    const ary = new Array(dayOfWeek).fill('');
+    const result = days.reduce((acc, day, i) => {
+      if (i + dayOfWeek === 14) acc.push('event');
+      acc.push(day);
+      return acc;
+    }, ary);
+    
+    return result;
+  }, [year, month]);
 
   const getMonthName = useCallback((monthNumber) => {
     const date = new Date(year, monthNumber - 1);
@@ -121,7 +122,7 @@ const Calendar = () => {
         ))}
         {daysInMonthWithEvent.map((day, idx) => idx === 14 ?
           showEvent ? (
-            <div className='event-full'>
+            <div key={idx} className='event-full'>
               <div className='event-content' style={{ backgroundImage: `url(/images/${currentEvent.imageFilenameFull}.webp)` }} >
                 <div className='event-main'>
                   <div className='event-content-title'>{ currentEvent.title.toUpperCase() }</div>
@@ -138,7 +139,7 @@ const Calendar = () => {
           (<div key={idx} className='day' onClick={() => handleEvent(day)}>
             {!!getEventDataOfDate(day) && <img src={`/images/${getEventDataOfDate(day).detail.imageFilenameThumb}.webp`} alt="thumb" className='event-thumb' />}
             <div className='day-number'>
-              <div className={getEventDataOfDate(day) ? 'event-active':'event-inactive'}>{ getDate(day) }</div>
+              <div className={getEventDataOfDate(day) ? 'event-active':'event-inactive'}>{ day && getDate(day) }</div>
             </div>
           </div>))}
       </div>
