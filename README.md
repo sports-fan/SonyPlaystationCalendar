@@ -1,6 +1,6 @@
 # Sony Playstation Calendar
 ## Libraries
-react, react-router-dom, axios, data-fns, jest
+react, react-router-dom, axios, date-fns, jest
 
 ## Features
 - The calendar renders events in the “Monthly” view (according to the desin).

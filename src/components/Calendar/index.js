@@ -15,7 +15,6 @@ const Calendar = () => {
   const [currentEvent, setCurrentEvent] = useState({});
 
   const navigate = useNavigate();
-
   const WEEK_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   useEffect(() => {
@@ -110,9 +109,9 @@ const Calendar = () => {
   return (
     <div className='container'>
       <div className='current-month'>
-        <div className='prev-month' onClick={ handlePrevMonth }>❮</div>
+        <div className='prev-month' key="prev btn" onClick={ handlePrevMonth }>❮</div>
         <div className='current-month-title'>{ getMonthName(month) } {year}</div>
-        <div className='next-month' onClick={ handleNextMonth }>❯</div>
+        <div className='next-month' key="next btn" onClick={ handleNextMonth }>❯</div>
       </div>
       <div className='calendar-grid'>
         {WEEK_NAMES.map((name, idx) => (
@@ -139,7 +138,7 @@ const Calendar = () => {
           (<div key={idx} className='day' onClick={() => handleEvent(day)}>
             {!!getEventDataOfDate(day) && <img src={`/images/${getEventDataOfDate(day).detail.imageFilenameThumb}.webp`} alt="thumb" className='event-thumb' />}
             <div className='day-number'>
-              <div className={!!getEventDataOfDate(day) && 'active'}>{ getDate(day) }</div>
+              <div className={getEventDataOfDate(day) ? 'event-active':'event-inactive'}>{ getDate(day) }</div>
             </div>
           </div>))}
       </div>

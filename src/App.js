@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
-import Calendar from './components/Calendar/Calendar';
+import Home from './components/Home';
+import Calendar from './components/Calendar';
 import './App.css'
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
     <div className='App'>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={ <Home /> } />
           <Route path="/:year/:month" element={ <Calendar /> } />
         </Routes>
       </BrowserRouter >

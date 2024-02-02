@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
-import Calendar from './Calendar'; // Adjust the import path as necessary
+import Calendar from '.'; // Adjust the import path as necessary
 import '@testing-library/jest-dom';
 import axios from 'axios';
 
