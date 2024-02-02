@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { getDate } from "date-fns";
-import CalendarCell from "./index.js";
+import CalendarCell from "./index";
 
 describe("CalendarCell", () => {
   const mockOnClickEvent = jest.fn();
@@ -17,9 +17,7 @@ describe("CalendarCell", () => {
     render(<CalendarCell day={day} onClickEvent={mockOnClickEvent} />);
     expect(screen.getByText(getDate(day))).toBeInTheDocument();
     expect(screen.queryByAltText("thumb")).toBeNull();
-    expect(screen.getByText(getDate(day)).parentNode).toHaveClass(
-      "event-inactive"
-    );
+    expect(screen.getByText(getDate(day))).toHaveClass("event-inactive");
   });
 
   it("renders correctly with an event", () => {
@@ -31,9 +29,7 @@ describe("CalendarCell", () => {
       `/images/${event.detail.imageFilenameThumb}.webp`
     );
     expect(screen.getByText(getDate(day))).toBeInTheDocument();
-    expect(screen.getByText(getDate(day)).parentNode).toHaveClass(
-      "event-active"
-    );
+    expect(screen.getByText(getDate(day))).toHaveClass("event-active");
   });
 
   it("triggers onClickEvent with the correct day when clicked", () => {

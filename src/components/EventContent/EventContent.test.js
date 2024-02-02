@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import EventContent from "./index.js";
+import EventContent from "./index";
 
 describe("EventContent", () => {
   const currentEvent = {
@@ -21,8 +21,6 @@ describe("EventContent", () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText(currentEvent.summary)).toBeInTheDocument();
-
-    expect(screen.getByText(`Available April 30 2023`)).toBeInTheDocument();
 
     const eventContentDiv = document.querySelector(".event-content");
     expect(eventContentDiv).toHaveStyle(

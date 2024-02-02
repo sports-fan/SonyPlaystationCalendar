@@ -7,9 +7,9 @@ const Home = () => {
   useEffect(() => {
     const date = new Date();
 
-    navigate(`/${getYear(date)}/${getMonth(date) + 1}`)
+    navigate(`/${getYear(date)}/${getMonth(date) + 1}`);
   }, [navigate]);
-  return (<></>);
-}
+  return <></>;
+};
 
 export default Home;
