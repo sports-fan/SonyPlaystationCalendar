@@ -12,7 +12,8 @@ react, react-router-dom, axios, date-fns, jest
 - The calendar is URL driven. Visiting an invalid date redirects to the current month(Febrary 2024)
 - Wrote unit tests using Jest.
 
-I am not sure if I impelemented everything as required. Looking forward to your feedback. Thank you
+I am not sure if I impelemented everything as required. I showed event contents between 2nd and 3rd week. I think it's more user-friendly than that shows the content below its event. 
+Looking forward to your feedback. Thank you
 ## Available Scripts
 
 In the project directory, you can run:
