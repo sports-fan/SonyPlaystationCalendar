@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.day:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
 .day-number {
   display: flex;
   justify-content: flex-end;

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   startOfMonth,
@@ -9,6 +9,7 @@ import {
   getDay,
   getMonth,
   getYear,
+  getWeekOfMonth,
 } from "date-fns";
 import axios from "axios";
 
@@ -25,6 +26,7 @@ const Calendar = () => {
   const [events, setEvents] = useState([]);
   const [showEvent, setShowEvent] = useState(false);
   const [currentEvent, setCurrentEvent] = useState({});
+  const [daysWithEvents, setDaysWithEvent] = useState([]);
 
   const navigate = useNavigate();
 
@@ -55,6 +57,18 @@ const Calendar = () => {
       return acc;
     }, []);
 
+    const dayOfWeek = getDay(new Date(year, month - 1, 1));
+    const ary = new Array(dayOfWeek).fill("");
+    const days = eachDayOfInterval({
+      start: startOfMonth(new Date(year, month - 1)),
+      end: endOfMonth(new Date(year, month - 1)),
+    });
+    const result = days.reduce((acc, day) => {
+      acc.push(day);
+      return acc;
+    }, ary);
+
+    setDaysWithEvent(result);
     setEvents(validEvents);
     setCurrentEvent({});
     setShowEvent(false);
@@ -67,22 +81,6 @@ const Calendar = () => {
       navigate(`/${getYear(date)}/${getMonth(date) + 1}`);
     }
   }, [isValidDate, navigate]);
-
-  const daysInMonthWithEvent = useMemo(() => {
-    const dayOfWeek = getDay(new Date(year, month - 1, 1));
-    const days = eachDayOfInterval({
-      start: startOfMonth(new Date(year, month - 1)),
-      end: endOfMonth(new Date(year, month - 1)),
-    });
-    const ary = new Array(dayOfWeek).fill("");
-    const result = days.reduce((acc, day, i) => {
-      if (i + dayOfWeek === 14) acc.push("event");
-      acc.push(day);
-      return acc;
-    }, ary);
-
-    return result;
-  }, [year, month]);
 
   const getMonthName = useCallback(
     (monthNumber) => {
@@ -120,10 +118,27 @@ const Calendar = () => {
         return;
       }
 
+      const numberOfWeeks = getWeekOfMonth(date);
+      const firstDayOfWeek = getDay(new Date(year, month - 1, 1));
+
+      const days = eachDayOfInterval({
+        start: startOfMonth(new Date(year, month - 1)),
+        end: endOfMonth(new Date(year, month - 1)),
+      });
+      const ary = new Array(firstDayOfWeek).fill("");
+      const result = days.reduce((acc, day, i) => {
+        if (i + firstDayOfWeek === 7 * numberOfWeeks) {
+          acc.push("event");
+        }
+        acc.push(day);
+        return acc;
+      }, ary);
+
+      setDaysWithEvent(result);
       setCurrentEvent(event.detail);
       setShowEvent(true);
     },
-    [getEventDataOfDate]
+    [year, month, getEventDataOfDate]
   );
 
   return (
@@ -145,8 +160,8 @@ const Calendar = () => {
             {name}
           </div>
         ))}
-        {daysInMonthWithEvent.map((day, idx) =>
-          idx === 14 ? (
+        {daysWithEvents.map((day, idx) => {
+          return day === "event" ? (
             showEvent ? (
               <EventContent key={idx} currentEvent={currentEvent} />
             ) : null
@@ -157,8 +172,8 @@ const Calendar = () => {
               event={getEventDataOfDate(day)}
               onClickEvent={handleEvent}
             />
-          )
-        )}
+          );
+        })}
       </div>
     </div>
   );
