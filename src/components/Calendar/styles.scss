@@ -1,0 +1,44 @@
+/* Calendar styles */
+@import "../../styles/mixin";
+@import "../../styles//variables";
+
+.container {
+  @include vertical-list;
+  gap: 10px;
+  width: 95%;
+  max-width: 900px;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 days in a week */
+  grid-gap: 8px;
+  color: $calendar-color;
+
+  &__weeknames {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+}
+
+.current-month {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid $calendar-color;
+  padding-bottom: 15px;
+
+  &__btn {
+    padding: 1px;
+    cursor: pointer;
+  }
+
+  &__title {
+    font-size: 30px;
+    font-weight: 300;
+  }
+}

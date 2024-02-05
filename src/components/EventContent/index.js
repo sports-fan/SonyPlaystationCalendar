@@ -1,23 +1,23 @@
 import React from "react";
 import { format } from "date-fns";
 
-import "./styles.css";
+import "./styles.scss";
 
 const EventContent = ({ currentEvent }) => {
   return (
-    <div className="event-full">
+    <div className="event-container">
       <div
-        className="event-content"
+        className="event"
         style={{
           backgroundImage: `url(/images/${currentEvent.imageFilenameFull}.webp)`,
         }}
       >
-        <div className="event-main">
-          <div className="event-content-title">
+        <div className="event-content">
+          <div className="event-content__title">
             {currentEvent.title.toUpperCase()}
           </div>
-          <div className="event-content-summary">{currentEvent.summary}</div>
-          <div className="event-content-date">
+          <div className="event-content__summary">{currentEvent.summary}</div>
+          <div className="event-content__date">
             Available{" "}
             {format(new Date(currentEvent.launchDate), "MMMM dd yyyy")}
           </div>
@@ -27,7 +27,7 @@ const EventContent = ({ currentEvent }) => {
             type="button"
             target="_blank"
             rel="noreferrer"
-            className="event-content-learn"
+            className="event-action__learn"
             href={currentEvent.learnMoreLink}
           >
             Learn More
@@ -36,7 +36,7 @@ const EventContent = ({ currentEvent }) => {
             type="button"
             target="_blank"
             rel="noreferrer"
-            className="event-content-order"
+            className="event-action__order"
             href={currentEvent.purchaseLink}
           >
             Pre Order Now

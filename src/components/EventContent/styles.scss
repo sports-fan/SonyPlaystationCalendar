@@ -1,0 +1,70 @@
+/* Event content styles */
+@import "../../styles/mixin";
+@import "../../styles//variables";
+
+.event-container {
+  grid-column-start: 1;
+  grid-column-end: 8;
+  width: 100%;
+  height: 100%;
+}
+
+.event {
+  @include vertical-list;
+  justify-content: space-around;
+  padding-left: 50px;
+  background-size: 100%;
+  background-position-y: center;
+  height: 300px;
+}
+
+.event-content {
+  @include vertical-list;
+  justify-content: space-between;
+  height: 100%;
+  padding-top: 30px;
+
+  &__title {
+    color: $event-content-coler;
+    font-weight: 400;
+    font-size: 20px;
+    padding-bottom: 10px;
+  }
+
+  &__summary {
+    color: $event-content-coler;
+    font-size: 12px;
+    width: 50%;
+    padding-bottom: 10px;
+  }
+
+  &__date {
+    color: $event-content-coler;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+.event-action {
+  margin-top: 20px;
+  padding-bottom: 40px;
+
+  &__learn {
+    border: none;
+    text-decoration: none;
+    border-radius: 30px;
+    margin-right: 10px;
+    padding: 8px 12px 8px 12px;
+    background-color: $event-learn-btn-color;
+    color: $event-content-coler;
+  }
+
+  &__order {
+    border: none;
+    border-radius: 30px;
+    padding: 8px 12px 8px 12px;
+    text-decoration: none;
+    background-color: $event-order-btn-color;
+    color: $event-content-coler;
+  }
+}

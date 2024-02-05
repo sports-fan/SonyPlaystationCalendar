@@ -1,24 +1,28 @@
 import React from "react";
 import { getDate } from "date-fns";
 
-import "./styles.css";
+import "./styles.scss";
 
 const CalendarCell = ({ day, event, onClickEvent }) => {
-  return (
-    <div className="day" onClick={() => onClickEvent(day)}>
+  return day !== "" ? (
+    <div className="cell" onClick={() => onClickEvent(day)}>
       {!!event && (
         <img
           src={`/images/${event.detail.imageFilenameThumb}.webp`}
           alt="thumb"
-          className="event-thumb"
+          className="cell__thumb"
         />
       )}
-      <div className="day-number">
-        <div className={event ? "event-active" : "event-inactive"}>
+      <div className="cell__number">
+        <div
+          className={event ? "cell__number--active" : "cell__number--inactive"}
+        >
           {day && getDate(day)}
         </div>
       </div>
     </div>
+  ) : (
+    <div />
   );
 };
 

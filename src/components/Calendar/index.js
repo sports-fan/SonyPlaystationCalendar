@@ -10,6 +10,7 @@ import {
   getMonth,
   getYear,
   getWeekOfMonth,
+  lastDayOfMonth,
 } from "date-fns";
 import axios from "axios";
 
@@ -17,7 +18,7 @@ import { WEEK_NAMES } from "utils/constants";
 import eventsData from "../../utils/events.json";
 import EventContent from "components/EventContent";
 import CalendarCell from "components/CalendarCell";
-import "./styles.css";
+import "./styles.scss";
 
 const Calendar = () => {
   const { year, month } = useParams();
@@ -120,17 +121,19 @@ const Calendar = () => {
 
       const numberOfWeeks = getWeekOfMonth(date);
       const firstDayOfWeek = getDay(new Date(year, month - 1, 1));
+      const lastDayofWeek = getDay(lastDayOfMonth(date));
 
       const days = eachDayOfInterval({
         start: startOfMonth(new Date(year, month - 1)),
         end: endOfMonth(new Date(year, month - 1)),
       });
-      const ary = new Array(firstDayOfWeek).fill("");
-      const result = days.reduce((acc, day, i) => {
+      let ary = new Array(firstDayOfWeek).fill("").concat(days);
+      ary = ary.concat(new Array(7 - lastDayofWeek).fill(""));
+      const result = ary.reduce((acc, day, i) => {
         if (i + firstDayOfWeek === 7 * numberOfWeeks) {
-          acc.push("event");
+          acc.splice(i + firstDayOfWeek, 0, "event");
         }
-        acc.push(day);
+
         return acc;
       }, ary);
 
@@ -144,19 +147,27 @@ const Calendar = () => {
   return (
     <div className="container">
       <div className="current-month">
-        <div className="prev-month" key="prev btn" onClick={handlePrevMonth}>
+        <div
+          className="current-month__btn"
+          key="prev btn"
+          onClick={handlePrevMonth}
+        >
           ❮
         </div>
-        <div className="current-month-title">
+        <div className="current-month__title">
           {getMonthName(month)} {year}
         </div>
-        <div className="next-month" key="next btn" onClick={handleNextMonth}>
+        <div
+          className="current-month__btn"
+          key="next btn"
+          onClick={handleNextMonth}
+        >
           ❯
         </div>
       </div>
-      <div className="calendar-grid">
+      <div className="calendar">
         {WEEK_NAMES.map((name, idx) => (
-          <div className="week-names" key={idx}>
+          <div className="calendar__weeknames" key={idx}>
             {name}
           </div>
         ))}

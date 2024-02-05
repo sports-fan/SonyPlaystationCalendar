@@ -22,7 +22,7 @@ describe("EventContent", () => {
 
     expect(screen.getByText(currentEvent.summary)).toBeInTheDocument();
 
-    const eventContentDiv = document.querySelector(".event-content");
+    const eventContentDiv = document.querySelector(".event");
     expect(eventContentDiv).toHaveStyle(
       `background-image: url(/images/${currentEvent.imageFilenameFull}.webp)`
     );

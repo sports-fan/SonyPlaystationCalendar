@@ -9,7 +9,7 @@ describe("CalendarCell", () => {
   const day = new Date(2023, 3, 14);
   const event = {
     detail: {
-      imageFilenameThumb: "event-thumb",
+      imageFilenameThumb: "cell__thumb",
     },
   };
 
@@ -17,7 +17,9 @@ describe("CalendarCell", () => {
     render(<CalendarCell day={day} onClickEvent={mockOnClickEvent} />);
     expect(screen.getByText(getDate(day))).toBeInTheDocument();
     expect(screen.queryByAltText("thumb")).toBeNull();
-    expect(screen.getByText(getDate(day))).toHaveClass("event-inactive");
+    expect(screen.getByText(getDate(day))).toHaveClass(
+      "cell__number--inactive"
+    );
   });
 
   it("renders correctly with an event", () => {
@@ -29,7 +31,7 @@ describe("CalendarCell", () => {
       `/images/${event.detail.imageFilenameThumb}.webp`
     );
     expect(screen.getByText(getDate(day))).toBeInTheDocument();
-    expect(screen.getByText(getDate(day))).toHaveClass("event-active");
+    expect(screen.getByText(getDate(day))).toHaveClass("cell__number--active");
   });
 
   it("triggers onClickEvent with the correct day when clicked", () => {

@@ -1,8 +1,11 @@
 # Sony Playstation Calendar
+
 ## Libraries
-react, react-router-dom, axios, date-fns, jest
+
+react, react-router-dom, axios, date-fns, jest, sass
 
 ## Features
+
 - The calendar renders events in the “Monthly” view (according to the desin).
 - The events fetch via an AJAX call is implemented from http://amock.io/. I used data from events.json file.
 - Used Flexbox and CSS Grid to render and style the calendar.
@@ -12,8 +15,8 @@ react, react-router-dom, axios, date-fns, jest
 - The calendar is URL driven. Visiting an invalid date redirects to the current month(Febrary 2024)
 - Wrote unit tests using Jest.
 
-I am not sure if I impelemented everything as required. I placed each event content between 2nd and 3rd week so that user can see it in the middle of the page. I think it's more user-friendly than that of the content below its event. 
 Looking forward to your feedback. Thank you
+
 ## Available Scripts
 
 In the project directory, you can run:
