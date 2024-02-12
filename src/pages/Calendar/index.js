@@ -14,7 +14,7 @@ import {
 } from "date-fns";
 import axios from "axios";
 
-import { WEEK_NAMES } from "utils/constants";
+import { WEEK_DAY_NAMES } from "utils/constants";
 import eventsData from "../../utils/events.json";
 import EventContent from "components/EventContent";
 import CalendarCell from "components/CalendarCell";
@@ -166,16 +166,14 @@ const Calendar = () => {
         </div>
       </div>
       <div className="calendar">
-        {WEEK_NAMES.map((name, idx) => (
+        {WEEK_DAY_NAMES.map((name, idx) => (
           <div className="calendar__weeknames" key={idx}>
             {name}
           </div>
         ))}
-        {daysWithEvents.map((day, idx) => {
-          return day === "event" ? (
-            showEvent ? (
-              <EventContent key={idx} currentEvent={currentEvent} />
-            ) : null
+        {daysWithEvents.map((day, idx) =>
+          day === "event" ? (
+            showEvent && <EventContent key={idx} currentEvent={currentEvent} />
           ) : (
             <CalendarCell
               key={idx}
@@ -183,8 +181,8 @@ const Calendar = () => {
               event={getEventDataOfDate(day)}
               onClickEvent={handleEvent}
             />
-          );
-        })}
+          )
+        )}
       </div>
     </div>
   );

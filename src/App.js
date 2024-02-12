@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "components/Home";
-import Calendar from "components/Calendar";
+import Home from "pages/Home";
+import Calendar from "pages/Calendar";
 import "./App.scss";
 
 function App() {
