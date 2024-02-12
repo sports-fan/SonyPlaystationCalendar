@@ -17,7 +17,7 @@ const CalendarCell = ({ day, event, onClickEvent }) => {
         <div
           className={event ? "cell__number--active" : "cell__number--inactive"}
         >
-          {day && getDate(day)}
+          {getDate(day)}
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@
 .container {
   @include vertical-list;
   gap: 10px;
-  width: 95%;
+  width: 100%;
   max-width: 900px;
 }
 
